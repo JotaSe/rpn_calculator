@@ -15,7 +15,7 @@ module RpnCalculator
     def perform(input)
       return ERROR_MESSAGE unless valid?(input)
       # update @tokens with the new input
-      @tokens += input
+      @tokens.push input
 
       # evaluate and take action by the input
       evaluate
