@@ -26,6 +26,7 @@ module RpnCalculator
 
     private
 
+    # Check if the inputs is an operator or a number
     def valid?(input)
       OPERATORS.include?(input) || numeric?(input)
     end
