@@ -8,5 +8,21 @@ module RpnCalculator
       @stack = []
       @elements = []
     end
+
+    private
+
+    def update(input)
+      if numeric?(input)
+        @stack += input.to_f!
+      else
+        @elements += input
+      end
+    end
+
+    def numeric?(input)
+      !Float(input).nil?
+    rescue
+      false
+    end
   end
 end
