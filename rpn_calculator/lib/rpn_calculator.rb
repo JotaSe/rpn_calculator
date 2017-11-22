@@ -1,5 +1,12 @@
-require "rpn_calculator/version"
+require 'rpn_calculator/version'
 
 module RpnCalculator
-  # Your code goes here...
+  OPERATORS = %w[+ - * /].freeze
+
+  class Calculator
+    def initialize
+      @stack = []
+      @elements = []
+    end
+  end
 end
