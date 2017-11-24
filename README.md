@@ -1,28 +1,77 @@
 # RpnCalculator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rpn_calculator`. To experiment with that code, run `bin/console` for an interactive prompt.
+https://en.wikipedia.org/wiki/Reverse_Polish_notation
 
-TODO: Delete this and the text above, and describe your gem
+RPN Calculator CLI tool
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'rpn_calculator'
-```
+Clone this project `git git@github.com:JotaSe/rpn_calculator.git && cd rpn_calculator`
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install rpn_calculator
-
 ## Usage
+CLI: type in the terminal `bin/calculator` to see options: 
 
-TODO: Write usage instructions here
+```
+Commands:
+  calculator clear           # Clear the calculators memory
+  calculator help [COMMAND]  # Describe available commands or one specific command
+  calculator input           # Input a value to the calculator
+  calculator operation       # Input a operation to the calculator
+```
+
+### CLI Examples
+
+**input**
+```
+$ bin/calculator input 2
+> 2.0
+$ bin/calculator input 2
+> 2.0
+$ bin/calculator input +
+> 4.0
+```
+
+**operation**
+```
+$ bin/calculator input 2 2 +
+> 4.0
+```
+
+**clear**
+```
+$ bin/calculator clear
+> Memory cleared successfully
+```
+
+### Gem example
+
+
+**input**
+``` ruby
+    calculator = RpnCalculator::Calculator.new
+    calculator.perform(2)
+    calculator.perform(2)
+    calculator.perform('+')
+    # 4.0
+```
+
+**operation**
+``` ruby
+    calculator = RpnCalculator::Calculator.new
+    operation = '2 2 +'.split(' ')
+    result = operation.map { |value|  calculator.perform(value) }.last
+    # 4.0
+```
+
+**clear**
+``` ruby
+      memory = RpnCalculator::Memory.new
+      memory.clear
+```
 
 ## Development
 
@@ -32,7 +81,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rpn_calculator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jotase/rpn_calculator. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
