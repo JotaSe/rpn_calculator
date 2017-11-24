@@ -2,7 +2,7 @@ require 'rpn_calculator/version'
 
 module RpnCalculator
   OPERATORS = %w[+ - * /].freeze
-  INVALID_ERROR = "Please enter only numbers or this operators : + - * /".freeze
+  INVALID_ERROR = 'Please enter only numbers or this operators : + - * /'.freeze
   EMPTY_STACK_ERROR = 'There are no numbers to calculate'.freeze
 
   # Class that will handle and operate the calculation functions
