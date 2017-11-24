@@ -12,6 +12,7 @@ module RpnCalculator
     end
 
     def save
+      clear
       FileUtils.mkdir_p('tmp') unless File.directory?('tmp')
       File.open(MEMORY_FILE, 'w+') do |f|
         Marshal.dump(self, f)
@@ -19,7 +20,7 @@ module RpnCalculator
     end
 
     def load
-      return unless memory_exists?
+      return unless exists?
       File.open(MEMORY_FILE) do |f|
         data = Marshal.load(f)
         @stack = data.stack
@@ -28,13 +29,11 @@ module RpnCalculator
     end
 
     def clear
-      return unless memory_exists?
+      return unless exists?
       File.open(MEMORY_FILE) { |f| File.delete(f) }
     end
 
-    private
-
-    def memory_exists?
+    def exists?
       File.exist? MEMORY_FILE
     end
   end
