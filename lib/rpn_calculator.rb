@@ -1,4 +1,5 @@
 require 'rpn_calculator/version'
+require 'rpn_calculator/memory'
 
 module RpnCalculator
   OPERATORS = %w[+ - * /].freeze
@@ -8,18 +9,19 @@ module RpnCalculator
   # Class that will handle and operate the calculation functions
   class Calculator
     def initialize
-      @stack = []
-      @tokens = []
+      @memory = RpnCalculator::Memory.new
     end
 
     # public method that will handle the calculator's input
     def perform(input)
       return INVALID_ERROR unless valid?(input)
-      # update @tokens with the new input
-      @tokens.push input
+      # update @memory.tokens with the new input
+      @memory.tokens.push input
 
       # evaluate and take action by the input
-      evaluate
+      result = evaluate
+      @memory.save
+      result
     end
 
     private
@@ -30,23 +32,23 @@ module RpnCalculator
     end
 
     def evaluate
-      @tokens.each do |token|
+      @memory.tokens.each do |token|
         # if is a number then add to the stack
         if numeric?(token)
-          @stack.push(token.to_f)
+          @memory.stack.push(token.to_f)
         else # if is a operator calculate
-          return EMPTY_STACK_ERROR if @stack.empty?
+          return EMPTY_STACK_ERROR if @memory.stack.empty?
           calculate(token)
         end
       end
       # Return the last value or the result if the operation is completed
-      @stack.last
+      @memory.stack.last
     end
 
     # Calculate the last 2 numbers in the stack
     def calculate(operator)
-      operands = @stack.pop(2)
-      @stack.push(operands.inject(operator))
+      operands = @memory.stack.pop(2)
+      @memory.stack.push(operands.inject(operator))
     end
 
     # Check if the input is a numeric value
