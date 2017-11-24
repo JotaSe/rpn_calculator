@@ -1,5 +1,5 @@
 require 'rpn_calculator/version'
-require 'rpn_calculator/memory'
+require_relative 'rpn_calculator/memory'
 
 module RpnCalculator
   OPERATORS = %w[+ - * /].freeze
