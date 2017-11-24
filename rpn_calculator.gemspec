@@ -14,6 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/JotaSe/rpn_calculator'
   spec.license       = 'MIT'
 
+  spec.files         = Dir.glob('{bin,lib,template}/**/*') + %w[LICENSE.txt README.md]
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
